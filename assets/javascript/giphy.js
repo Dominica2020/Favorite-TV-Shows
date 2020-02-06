@@ -4,20 +4,19 @@ var topics = ["the x files", "fresh prince of bel air", "the office us",
 
 //HTML button creation
 function createButtons() {
-    $("#placebuttons").empty();
+    $("#place-buttons").empty();
     for (i = 0; i < topics.length; i++) {
         var newButton = $("<button>");
         newButton.addClass("show");
         newButton.attr("show-name", topics[i]);
-        newButton.attr("id", "button");
+        newButton.attr("id", "square");
         newButton.text(topics[i]);
-        $("#placebuttons").append(newButton);
-
+        $("#place-buttons").append(newButton);  
     }
 }
 
 //On-click functions
-$("#giphy").on("click", function() {
+$("#giphy-slot").on("click", function() {
     console.log("HEY!");
 
 });
@@ -28,6 +27,10 @@ $("#giphy").on("click", function() {
 
 
 
-
-
 createButtons();
+
+/*
+$("#square").on("click", function() {
+    console.log("HEY!");
+});
+*/
