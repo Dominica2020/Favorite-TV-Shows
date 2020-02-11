@@ -1,6 +1,6 @@
 //Array of strings
 var topics = ["the x files", "fresh prince of bel air", "the office us",
-    "mad tv", "family guy", "family matters", "adventure time"];
+    "mad tv", "family guy", "stranger things", "family matters", "adventure time"];
 
 //Call functiom to create buttons
 createButtons();
@@ -18,7 +18,8 @@ function createButtons() {
 }
 
 //On-click functions
-$("button").on("click", function () {
+$(".show").on("click", function () {
+    $("#giphy-slot").empty();
     var type = $(this).data("type");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + type + "&api_key=4WTlWiJ9gXT1QsgpJicnlDN7sahz0Fag&limit=10";
     $.ajax({ url: queryURL, method: "GET" })
@@ -44,11 +45,12 @@ $("button").on("click", function () {
 
 
 
-$("#press").on("click", function () {
+$("#press").on("click", function (e) {
+    e.preventDefault();
+    $("#giphy-slot").empty();
     var newSearch = $("input").eq(0).val();
     topics.push(newSearch);
-    var type = $(this).data("type");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + type + "&api_key=4WTlWiJ9gXT1QsgpJicnlDN7sahz0Fag&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + newSearch + "&api_key=4WTlWiJ9gXT1QsgpJicnlDN7sahz0Fag&limit=10";
     $.ajax({ url: queryURL, method: "GET" })
         .done(function (response) {
             for (var i = 0; i < response.data.length; i++) {
@@ -68,19 +70,34 @@ $("#press").on("click", function () {
                 $("#giphy-slot").prepend(searchDiv);
             }
         })
+
     createButtons();
-    return false;
 });
+
+
+// Click event for images
+
+$(document).on("click", ".searchImage", function () { //for things that get dynamically rendered (based on events, not the page loading) asynch
+    // "this" - object triggering the function here
+    var currentState = $(this).attr("data-state"); // we now have this current state whcih is either still or animated
+    // we now want to determine the value of current state
+    if(currentState === "still") {
+        var animated = $(this).attr("data-animated");
+        $(this).attr("data-state", "animated");
+        $(this).attr("src", animated);
+    }   else {
+        var still = $(this).attr("data-still");
+        $(this).attr("data-state", "still");
+        $(this).attr("src", still);
+    }
+});
+
+
 
 
 
 /*
-$("#press").on("click", function () {
-    var newSearch = $("input").eq(0).val();
-    topics.push(newSearch);
-    createButtons();
-    return false;
-});
+
 */
 
 
