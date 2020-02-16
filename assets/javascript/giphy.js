@@ -1,6 +1,6 @@
 //Array of strings
-var topics = ["the x files", "fresh prince of bel air", "the office us",
-    "mad tv", "family guy", "stranger things", "family matters", "adventure time"];
+var topics = ["The X Files", "Fresh Prince of Bel Air", "The Office US",
+    "Mad Tv", "Family Guy", "Stranger Things", "Family Matters", "Adventure Time"];
 
 //Call functiom to create buttons
 createButtons();
@@ -35,6 +35,7 @@ $(".show").on("click", function () {
                 image.attr("data-still", still);
                 image.attr("data-animated", animated);
                 image.attr("data-state", "still");
+                image.attr("class", "image-fluid");
                 image.addClass("searchImage");
                 searchDiv.append(p);
                 searchDiv.append(image);
